@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.py~
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# PyCharm
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs, output
+*.log
+*.out
+
+#since csv is so big:
+recipe catalog raw/recipes_data.csv
+
