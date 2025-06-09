@@ -2,7 +2,8 @@ import random
 import sys
 import time
 
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
 from uic5 import Ui_Form
 
@@ -41,6 +42,26 @@ class Example(QWidget):
 def main(data, nrows):
     app = QApplication(sys.argv)
     window = Example(data, nrows)
+    window.setWindowIcon(QIcon("chicken.JPG"))
+    window.setStyleSheet("""
+    QWidget {
+        background-color: #36393e;
+        color: white;
+    }
+    QPushButton {
+        border: 3px solid #858AE3;
+        border-radius: 20px;
+        padding: 20px;
+    }
+    QPushButton:hover{
+        background-color: #858AE3;
+        border: 3px solid #858AE3;
+        border-radius: 20px;
+        padding: 20px;
+    }
+    """)
+
+
     window.show()
 
     sys.exit(app.exec_())

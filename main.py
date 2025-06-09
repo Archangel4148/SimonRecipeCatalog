@@ -4,7 +4,7 @@ import pandas as pd
 
 from gui import main
 
-nrows = 10
+nrows = 1000
 data = pd.read_csv("recipe catalog raw/recipes_data.csv", nrows=nrows)
 data.drop(columns=["source"])
 
