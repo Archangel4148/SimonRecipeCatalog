@@ -2,7 +2,7 @@ import random
 
 from PyQt5.QtWidgets import QWidget
 
-from uic5 import Ui_Form
+from recipe_catalog_window_init import Ui_Form
 
 
 class RecipeCatalogWindow(QWidget):
