@@ -1,24 +1,47 @@
 import ast
+import sys
 
 import pandas as pd
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication
 
-from gui import main
+from recipe_generator import RecipeCatalogWindow
 
+# Load and pre-process the data
 nrows = 1000
-data = pd.read_csv("recipe catalog raw/recipes_data.csv", nrows=nrows)
+data = pd.read_csv("recipes_data.csv", nrows=nrows)
 data.drop(columns=["source"])
 
 # Stringified lists
-data["ingredients"] = data["ingredients"].apply(ast.literal_eval)
-data["directions"] = data["directions"].apply(ast.literal_eval)
-data["NER"] = data["NER"].apply(ast.literal_eval)
+data["ingredients"] = data["ingredients"].apply(ast.literal_eval).apply(lambda x: '\n'.join(x))
+data["directions"] = data["directions"].apply(ast.literal_eval).apply(lambda x: '\n'.join(x))
+data["NER"] = data["NER"].apply(ast.literal_eval).apply(lambda x: ', '.join(x))
 
-data["ingredients"] = data["ingredients"].apply(lambda x: '\n'.join(x))
-data["directions"] = data["directions"].apply(lambda x: '\n'.join(x))
-data["NER"] = data["NER"].apply(lambda x: ', '.join(x))
+# Control variable to limit storage of recipes in memory
+MAX_CACHE_SIZE = 500
 
-recipeCount = 0
-#This is -1 because the first item saved is saved in recipeCache[currentIndex+1], or zero
-currentIndex = -1
-recipeCache = []
-main(data, nrows, recipeCount, currentIndex, recipeCache)
+# Create the application
+app = QApplication(sys.argv)
+window = RecipeCatalogWindow(data, MAX_CACHE_SIZE)
+window.setWindowIcon(QIcon("chicken.JPG"))
+window.setStyleSheet("""
+QWidget {
+    background-color: #36393e;
+    color: white;
+}
+QPushButton {
+    border: 3px solid #858AE3;
+    border-radius: 20px;
+    padding: 20px;
+}
+QPushButton:hover{
+    background-color: #858AE3;
+    border: 3px solid #858AE3;
+    border-radius: 20px;
+    padding: 20px;
+}
+""")
+
+# Show the application
+window.show()
+sys.exit(app.exec_())

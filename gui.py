@@ -7,12 +7,11 @@
 
 import random
 import sys
-import time
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget
 
-from uic5 import Ui_Form
+from SimonRecipeCatalog.uic5 import Ui_Form
 
 
 class RecipeGenerator(QWidget):
