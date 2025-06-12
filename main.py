@@ -17,12 +17,9 @@ data["ingredients"] = data["ingredients"].apply(ast.literal_eval).apply(lambda x
 data["directions"] = data["directions"].apply(ast.literal_eval).apply(lambda x: '\n'.join(x))
 data["NER"] = data["NER"].apply(ast.literal_eval).apply(lambda x: ', '.join(x))
 
-# Control variable to limit storage of recipes in memory
-MAX_CACHE_SIZE = 500
-
 # Create the application
 app = QApplication(sys.argv)
-window = RecipeCatalogWindow(data, MAX_CACHE_SIZE)
+window = RecipeCatalogWindow(data)
 window.setWindowIcon(QIcon("chicken.JPG"))
 window.setStyleSheet("""
 QWidget {

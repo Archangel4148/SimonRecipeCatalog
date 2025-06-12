@@ -7,7 +7,7 @@ from uic5 import Ui_Form
 
 class RecipeCatalogWindow(QWidget):
 
-    def __init__(self, data, max_cache_size=None):
+    def __init__(self, data):
         super().__init__()
 
         # Create the UI
@@ -16,7 +16,6 @@ class RecipeCatalogWindow(QWidget):
 
         # Data
         self.data = data
-        self.max_cache_size = max_cache_size
         self.nrows: int = self.data.shape[0]  # Length of the data
         self.currentIndex: int = -1  # Start at -1 because the first item is saved in recipeCache[currentIndex+1]
         self.recipeCache: list = []  # Storage for loaded recipe indices
@@ -50,10 +49,6 @@ class RecipeCatalogWindow(QWidget):
 
             # Add the new index to the cache and display
             self.recipeCache.append(new_index)
-            # Limit the size of the cache
-            if self.max_cache_size is not None and len(self.recipeCache) > self.max_cache_size:
-                self.recipeCache.pop(0)
-                self.currentIndex -= 1
             self.display_recipe(new_index)
 
         else:
