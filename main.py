@@ -17,4 +17,8 @@ data["ingredients"] = data["ingredients"].apply(lambda x: '\n'.join(x))
 data["directions"] = data["directions"].apply(lambda x: '\n'.join(x))
 data["NER"] = data["NER"].apply(lambda x: ', '.join(x))
 
-main(data, nrows)
+recipeCount = 0
+#This is -1 because the first item saved is saved in recipeCache[currentIndex+1], or zero
+currentIndex = -1
+recipeCache = []
+main(data, nrows, recipeCount, currentIndex, recipeCache)
